@@ -1,6 +1,9 @@
 with Ada.Strings.Unbounded;
 with Ada.Unchecked_Deallocation;
 
+with GNATCOLL.JSON;
+use GNATCOLL;
+
 package Body work.punks.Company is
 
 
@@ -145,6 +148,24 @@ package Body work.punks.Company is
    begin
       return Company_Ptr.Updated_At;
    end Get_Updated_At;
+
+
+
+   function From_JSON (Payload: String) return Company_Types.Company_Access
+   is
+   Company_T: Company_Types.Company_Access:=new Company_Types.Company_Type;
+   Result: JSON.JSON_Value:=JSON.Read (Payload);
+   begin
+
+       Set_Company_Name (Company_T, Result.Get("Company_Name"));
+   return Company_T;
+   end From_JSON;
+
+   function To_JSON (Company_T: Company_Types.Company_Access) return String
+   is
+   begin
+return "";
+   end To_JSON;
 
    ------------------
    -- Free_Company --

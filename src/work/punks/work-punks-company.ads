@@ -59,5 +59,10 @@ package work.punks.Company is
    -- Memory management
    procedure Free_Company (Company_Ptr : in out Company_Access);
 
+   -- JSON Management
+
+   function From_JSON (Payload: String) return Company_Access;
+   function To_JSON (Company_T: Company_Access) return String;
+
 
 end work.punks.Company;
